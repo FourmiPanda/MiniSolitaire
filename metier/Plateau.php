@@ -48,8 +48,8 @@
       public function move($x1,$y1,$dir){
         switch ($dir) {
           case 1:
-          if($this->existCase($x1,$y1) && $this->existCase($x1-2,$y1) )
-            $this->plateau[]
+          //if($this->existCase($x1,$y1) && $this->existCase($x1-2,$y1) )
+            //$this->plateau[]
               break;
           case 2:
               echo "i égal 1";
