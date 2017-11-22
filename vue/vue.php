@@ -1,6 +1,8 @@
 <?php
 require_once PATH_METIER."/mouvement.php";
 
+
+
 class Vue{
 
 function afficherAcceuil(){
@@ -49,6 +51,12 @@ header("Content-type: text/html; charset=utf-8");
 <?php
   }
   function afficherPlateau(){
+
+    $plateau = new Plateau();
+    if(!isset($_SESSION['plateau'])){
+        $_SESSION['plateau'] = $plateau;
+    }
+
   header("Content-type: text/html; charset=utf-8");
   ?>
     <html>
@@ -58,71 +66,110 @@ header("Content-type: text/html; charset=utf-8");
     </head>
     <body>
       <h1>Jeu du Solitaire</h1>
+
+      <!-- BOUTON DéCO-->
+      <div style="float:right;">
+
+        <form method="post" action="index.php">
+          <input type="submit" name="soumettre" value="deco"/>
+        </form>
+
+      </div>
+      <!-- FIN BOUTON Déco-->
+
       <table>
        <tr>
-         <td> </td>
-         <td> </td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td> </td>
-         <td> </td>
+        <?php
+          for($i = 0;$i<7;$i++){
+            if($_SESSION['plateau']->getCase(0,$i)){
+              echo "<td>0</td>\n\t\t";
+            }else{
+              echo "<td> </td>\n\t\t";
+            }
+          }
+        ?>
+
        </tr>
        <tr>
-         <td> </td>
-         <td> </td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td> </td>
-         <td> </td>
+         <?php
+           for($i = 0;$i<7;$i++){
+             if($_SESSION['plateau']->getCase(1,$i)){
+               echo "<td>0</td>\n\t\t";
+             }else{
+               echo "<td> </td>\n\t\t";
+             }
+           }
+         ?>
        </tr>
        <tr>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
+         <?php
+           for($i = 0;$i<7;$i++){
+             if($_SESSION['plateau']->getCase(2,$i)){
+               echo "<td>0</td>\n\t\t";
+             }else{
+               echo "<td> </td>\n\t\t";
+             }
+           }
+         ?>
        </tr>
        <tr>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
+         <?php
+           for($i = 0;$i<7;$i++){
+             if($_SESSION['plateau']->getCase(3,$i)){
+               echo "<td>0</td>\n\t\t";
+             }else{
+               echo "<td> </td>\n\t\t";
+             }
+           }
+         ?>
        </tr>
        <tr>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
+         <?php
+           for($i = 0;$i<7;$i++){
+             if($_SESSION['plateau']->getCase(4,$i)){
+               echo "<td>0</td>\n\t\t";
+             }else{
+               echo "<td> </td>\n\t\t";
+             }
+           }
+         ?>
        </tr>
        <tr>
-         <td> </td>
-         <td> </td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td> </td>
-         <td> </td>
+         <?php
+           for($i = 0;$i<7;$i++){
+             if($_SESSION['plateau']->getCase(5,$i)){
+               echo "<td>0</td>\n\t\t";
+             }else{
+               echo "<td> </td>\n\t\t";
+             }
+           }
+         ?>
        </tr>
        <tr>
-         <td> </td>
-         <td> </td>
-         <td>0</td>
-         <td>0</td>
-         <td>0</td>
-         <td> </td>
-         <td> </td>
+         <?php
+           for($i = 0;$i<7;$i++){
+
+             if($_SESSION['plateau']->getCase(6,$i)){
+               echo "<td>0</td>\n\t\t";
+             }else{
+               echo "<td> </td>\n\t\t";
+             }
+           }
+         ?>
        </tr>
     </table>
+
+    <h2>Entrée des coordonnées :</h2>
+    <form method="post" action="Index.php">
+      X1=
+      <input name="coordoX1" type="text"/>
+      Y1=
+      <input name="coordoY1" type="text"/><br>
+      DIR ( de 1 à 8 )=
+      <input name="coordoDIR" type="text"/>
+
+      <input type="submit" name="coordo" value="Envoyer"/>
+    </form>
 
     </body>
     </html>

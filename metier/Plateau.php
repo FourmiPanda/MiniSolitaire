@@ -1,77 +1,83 @@
 <?php
   class Plateau{
-      $plateau;
+      private $plateau = array();
 
 
       public function __construct(){
-        $this->plateau = array(
-            "00"=> false,
-            "01"=>false,
-            "02"=>true,
-            "03"=>true,
-            "04"=>true,
-            "05"=>false,
-            "06"=>false,
-
-            "10"=> false,
-            "11"=>false,
-            "12"=>true,
-            "13"=>true,
-            "14"=>true,
-            "15"=>false,
-            "16"=>false,
-
-            "20"=> true,
-            "21"=>true,
-            "22"=>true,
-            "23"=>true,
-            "24"=>true,
-            "25"=>true,
-            "26"=>true,
-
-            "30"=> true,
-            "31"=>true,
-            "32"=>true,
-            "33"=>true,
-            "34"=>true,
-            "35"=>true,
-            "36"=>true,
-
-            "40"=> true,
-            "41"=>true,
-            "42"=>true,
-            "43"=>true,
-            "44"=>true,
-            "45"=>true,
-            "46"=>true,
-
-            "50"=> false,
-            "51"=>false,
-            "52"=>true,
-            "53"=>true,
-            "54"=>true,
-            "55"=>false,
-            "56"=>false,
-
-            "60"=> false,
-            "61"=>false,
-            "62"=>true,
-            "63"=>true,
-            "64"=>true,
-            "65"=>false,
-            "66"=>false,
-
-
-
-        );
-
-
+          // y->                x
+          // [ 1 1 0 0 0 1 1 ] |
+          // [ 1 1 0 0 0 1 1 ] V
+          // [ 0 0 0 0 0 0 0 ]
+          // [ 0 0 0 1 0 0 0 ]
+          // [ 0 0 0 0 0 0 0 ]
+          // [ 1 1 0 0 0 1 1 ]
+          // [ 1 1 0 0 0 1 1 ]
+          //matrice[x][y]
+          $this->plateau[0] = array(-1,-1,1,1,1,-1,-1);
+          $this->plateau[1] = array(-1,-1,1,1,1,-1,-1);
+          $this->plateau[2] = array(1,1,1,1,1,1,1);
+          $this->plateau[3] = array(1,1,1,0,1,1,1);
+          $this->plateau[4] = array(1,1,1,1,1,1,1);
+          $this->plateau[5] = array(-1,-1,1,1,1,-1,-1);
+          $this->plateau[6] = array(-1,-1,1,1,1,-1,-1);
 
       }
 
+      //Fonction qui renvoie le numéro correspondant aux coordonnées envoyées
+      // -1 : Case interdite
+      // 0 : Case vide
+      // 1 : Case avec bille
+      // -2 : Case qui n'est pas dans le tableau
+      public function getCase($x,$y){
+        if($x<=6 && $x>=0 && $y<=6 && $y>=0){
+          return $this->plateau[$x][$y];
+        }else{
+          return -2;
+        }
+      }
+
+      //Fonction qui renvoie true si la case n'est pas interdite
+      public function existCase($x1,$y1){
+        if($this->getCase($x1,$y1)>=0){
+          return true;
+        }else{
+          return false;
+        }
+      }
+
+      public function move($x1,$y1,$dir){
+        switch ($dir) {
+          case 1:
+          if($this->existCase($x1,$y1) && $this->existCase($x1-2,$y1) )
+            $this->plateau[]
+              break;
+          case 2:
+              echo "i égal 1";
+              break;
+          case 3:
+              echo "i égal 2";
+          break;
+          case 4:
+              echo "i égal 2";
+              break;
+          case 5:
+              echo "i égal 2";
+              break;
+          case 6:
+              echo "i égal 2";
+              break;
+          case 7:
+              echo "i égal 2";
+              break;
+          case 8:
+              echo "i égal 2";
+              break;
+          default:
+
+        }
 
 
-
+      }
 
 
 

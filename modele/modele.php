@@ -29,7 +29,7 @@ class TableAccesException extends MonException{
 
 class Modele{
   private $connexion;
-  private
+
 
 // Constructeur de la classe
 
