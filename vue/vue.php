@@ -62,105 +62,47 @@ header("Content-type: text/html; charset=utf-8");
     <html>
     <head>
       <meta charset="utf-8" />
+      <link rel="stylesheet" href="vue/plateau.css" />
       <title>Page de jeu</title>
     </head>
     <body>
 
-      <div style="float:left"><img src="vue/logo.png"></div>
+      <div style="float:left;"><img src="vue/logo.png"></div>
 
       <!-- BOUTON DéCO-->
-      <div style="float:right;">
 
-        <form method="post" action="index.php">
+      <div style="float:right;">
+        <form method="post" action="Index.php">
           <input type="submit" name="soumettre" value="deco"/>
         </form>
-
       </div>
+
       <!-- FIN BOUTON Déco-->
 
-      <div style="text-align:center;position:abosulute;left:50%;top:50%;">
+      <center>
+
+      <!-- AFFICHAGE DU PLATEAU-->
+
       <table>
-       <tr>
         <?php
-          for($i = 0;$i<7;$i++){
-            if($_SESSION['plateau']->getCase(0,$i)){
-              echo "<td><img src='vue/bille.jpg' height='42' width='42' /></td>\n\t\t";
-            }else{
-             echo "<td><img src='vue/blanc.jpg' height='42' width='42'/></td>\n\t\t";
+          for ($j=0; $j < 7; $j++) {
+            echo "<tr>";
+            for($i = 0;$i<7;$i++){
+              if($_SESSION['plateau']->getCase($j,$i)==1){
+                echo "<td><img src='vue/bille.jpg' height='42' width='42' /></td>\n\t\t";
+              }else{
+               echo "<td><img src='vue/blanc.jpg' height='42' width='42'/></td>\n\t\t";
+              }
             }
+            echo "</tr>";
           }
-        ?>
-
-       </tr>
-       <tr>
-         <?php
-           for($i = 0;$i<7;$i++){
-             if($_SESSION['plateau']->getCase(1,$i)){
-               echo "<td><img src='vue/bille.jpg' height='42' width='42' /></td>\n\t\t";
-             }else{
-              echo "<td><img src='vue/blanc.jpg' height='42' width='42'/></td>\n\t\t";
-             }
-           }
          ?>
-       </tr>
-       <tr>
-         <?php
-           for($i = 0;$i<7;$i++){
-             if($_SESSION['plateau']->getCase(2,$i)){
-               echo "<td><img src='vue/bille.jpg' height='42' width='42' /></td>\n\t\t";
-             }else{
-              echo "<td><img src='vue/blanc.jpg' height='42' width='42'/></td>\n\t\t";
-             }
-           }
-         ?>
-       </tr>
-       <tr>
-         <?php
-           for($i = 0;$i<7;$i++){
-             if($_SESSION['plateau']->getCase(3,$i)){
-               echo "<td><img src='vue/bille.jpg' height='42' width='42' /></td>\n\t\t";
-             }else{
-              echo "<td><img src='vue/blanc.jpg' height='42' width='42'/></td>\n\t\t";
-             }
-           }
-         ?>
-       </tr>
-       <tr>
-         <?php
-           for($i = 0;$i<7;$i++){
-             if($_SESSION['plateau']->getCase(4,$i)){
-               echo "<td><img src='vue/bille.jpg' height='42' width='42' /></td>\n\t\t";
-             }else{
-              echo "<td><img src='vue/blanc.jpg' height='42' width='42'/></td>\n\t\t";
-             }
-           }
-         ?>
-       </tr>
-       <tr>
-         <?php
-           for($i = 0;$i<7;$i++){
-             if($_SESSION['plateau']->getCase(5,$i)){
-               echo "<td><img src='vue/bille.jpg' height='42' width='42' /></td>\n\t\t";
-             }else{
-              echo "<td><img src='vue/blanc.jpg' height='42' width='42'/></td>\n\t\t";
-             }
-           }
-         ?>
-       </tr>
-       <tr>
-         <?php
-           for($i = 0;$i<7;$i++){
-
-             if($_SESSION['plateau']->getCase(6,$i)){
-               echo "<td><img src='vue/bille.jpg' height='42' width='42' /></td>\n\t\t";
-             }else{
-              echo "<td><img src='vue/blanc.jpg' height='42' width='42'/></td>\n\t\t";
-             }
-           }
-         ?>
-       </tr>
     </table>
-  </div>
+
+    <!-- FIN AFFICHAGE DU PLATEAU-->
+
+
+  </center>
 
     <h2>Entrée des coordonnées :</h2>
     <form method="post" action="Index.php">
