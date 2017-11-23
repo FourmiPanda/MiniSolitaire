@@ -33,7 +33,7 @@ function verificationPseudo(){
         $passCry = crypt($_POST['password'],$mdp);
 
         if($mdp==$passCry){
-
+          $_SESSION['pseudo'] = $_POST['login'];
           $this->vue->afficherPlateau();
         }else{
           $this->accueil();

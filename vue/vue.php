@@ -65,9 +65,9 @@ header("Content-type: text/html; charset=utf-8");
       <link rel="stylesheet" href="vue/plateau.css" />
       <title>Page de jeu</title>
     </head>
-    <body>
+    <body background="vue/fond.jpg">
 
-      <div style="float:left;"><img src="vue/logo.png"></div>
+      <!-- <div style="float:left;"><img src="vue/logo.png"></div> -->
 
       <!-- BOUTON DéCO-->
 
@@ -79,7 +79,7 @@ header("Content-type: text/html; charset=utf-8");
 
       <!-- FIN BOUTON Déco-->
       <!--Heure-->
-            <center><h1><div id="div_horloge"></div></h1></center>
+             <FONT color="white"><h1><div id="div_horloge"></div> Bonjour, <?php echo $_SESSION['pseudo'] ?>.</h1></FONT>
 
         <script type="text/javascript">
           window.onload=function() {
@@ -129,15 +129,15 @@ header("Content-type: text/html; charset=utf-8");
                 echo $j;
                 echo "&y=";
                 echo $i;
-                echo "'><img alt='bille' src='vue/bille.jpg' height='42' width='42' /></a></div></td>\n\t\t";
+                echo "'><img alt='bille' src='vue/bille.jpg' height='80' width='80' /></a></div></td>\n\t\t";
               }else if($_SESSION['plateau']->isCase($j,$i)==3){
-                echo "<td><div class='select'><img src='vue/billeSelect.jpg' height='42' width='42'/></div></td>\n\t\t";
+                echo "<td><div class='select'><img src='vue/billeSelect.jpg' height='80' width='80'/></div></td>\n\t\t";
               }else{
                 echo "<td><div class='blur'><a href='Index.php?x=";
                 echo $j;
                 echo "&y=";
                 echo $i;
-                echo "'><img alt='bille' src='vue/blanc.jpg' height='42' width='42' /></a></div></td>\n\t\t";
+                echo "'><img alt='' src='vue/caseInterdite.png' height='80' width='80' /></a></div></td>\n\t\t";
               }
             }
             echo "</tr>";
@@ -145,12 +145,12 @@ header("Content-type: text/html; charset=utf-8");
          ?>
     </table>
     <?php
-      var_dump($_POST);
-      var_dump($_GET);
-      var_dump($_SESSION);
+      // var_dump($_POST);
+      // var_dump($_GET);
+      // var_dump($_SESSION);
      ?>
 
-    <!-- FIN AFFICHAGE DU PLATEAU AFFICHER UNE FLECHE DE RETOUR ( deselection ) -->
+    <!-- FIN AFFICHAGE DU PLATEAU-->
 
 
   </center>
