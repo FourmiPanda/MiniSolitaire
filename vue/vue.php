@@ -150,7 +150,7 @@ header("Content-type: text/html; charset=utf-8");
       var_dump($_SESSION);
      ?>
 
-    <!-- FIN AFFICHAGE DU PLATEAU-->
+    <!-- FIN AFFICHAGE DU PLATEAU AFFICHER UNE FLECHE DE RETOUR ( deselection ) -->
 
 
   </center>
