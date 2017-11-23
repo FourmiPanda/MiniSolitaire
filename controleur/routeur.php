@@ -29,8 +29,8 @@ class Routeur {
       }else{
           $this->ctrlAuthentification->accueil();
       }
-    }else if(isset($_POST['coordo'])){
-        $this->envoyerCoordo->envoyerCoordo();
+    }else if(isset($_GET['x'])&& isset($_GET['y'])){
+        $this->envoyerCoordo->envoyerCoordo($_GET['x'],$_GET['y']);
     }else{
       $this->ctrlAuthentification->accueil();
     }

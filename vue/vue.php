@@ -1,5 +1,5 @@
 <?php
-require_once PATH_METIER."/mouvement.php";
+require_once PATH_METIER."/Plateau.php";
 
 
 
@@ -24,8 +24,8 @@ header("Content-type: text/html; charset=utf-8");
   <body background="vue/solitaire.jpg">
     <?php
       var_dump($_POST);
-      var_dump($_COOKIE);
-
+      var_dump($_GET);
+      var_dump($_SESSION);
     ?>
     <div class="login-page">
       <div class="form">
@@ -78,43 +78,82 @@ header("Content-type: text/html; charset=utf-8");
       </div>
 
       <!-- FIN BOUTON Déco-->
+      <!--Heure-->
+            <center><h1><div id="div_horloge"></div></h1></center>
 
+        <script type="text/javascript">
+          window.onload=function() {
+            horloge('div_horloge');
+          };
+
+          function horloge(el) {
+            if(typeof el=="string") { el = document.getElementById(el); }
+            function actualiser() {
+              var date = new Date();
+              var str = date.getHours();
+              str += ':'+(date.getMinutes()<10?'0':'')+date.getMinutes();
+              str += ':'+(date.getSeconds()<10?'0':'')+date.getSeconds();
+              el.innerHTML = str;
+            }
+            actualiser();
+            setInterval(actualiser,1000);
+          }
+      </script>
+      <!-- HEURE -->
       <center>
 
       <!-- AFFICHAGE DU PLATEAU-->
 
       <table>
+
+        <!-- <?php
+  for ($j=0; $j < 7; $j++) {
+    echo "<tr>";
+    for($i = 0;$i<7;$i++){
+      if($_SESSION['plateau']->isCase($j,$i)==1){
+        echo "<td><img src='vue/bille.jpg' height='42' width='42' /></td>\n\t\t";
+      }else{
+       echo "<td><img src='vue/blanc.jpg' height='42' width='42'/></td>\n\t\t";
+      }
+    }
+    echo "</tr>";
+  }
+ ?> -->
+
         <?php
           for ($j=0; $j < 7; $j++) {
             echo "<tr>";
             for($i = 0;$i<7;$i++){
-              if($_SESSION['plateau']->getCase($j,$i)==1){
-                echo "<td><img src='vue/bille.jpg' height='42' width='42' /></td>\n\t\t";
+              if($_SESSION['plateau']->isCase($j,$i)==1){
+                echo "<td><div class='blur'><a href='Index.php?x=";
+                echo $j;
+                echo "&y=";
+                echo $i;
+                echo "'><img alt='bille' src='vue/bille.jpg' height='42' width='42' /></a></div></td>\n\t\t";
+              }else if($_SESSION['plateau']->isCase($j,$i)==3){
+                echo "<td><div class='select'><img src='vue/billeSelect.jpg' height='42' width='42'/></div></td>\n\t\t";
               }else{
-               echo "<td><img src='vue/blanc.jpg' height='42' width='42'/></td>\n\t\t";
+                echo "<td><div class='blur'><a href='Index.php?x=";
+                echo $j;
+                echo "&y=";
+                echo $i;
+                echo "'><img alt='bille' src='vue/blanc.jpg' height='42' width='42' /></a></div></td>\n\t\t";
               }
             }
             echo "</tr>";
           }
          ?>
     </table>
+    <?php
+      var_dump($_POST);
+      var_dump($_GET);
+      var_dump($_SESSION);
+     ?>
 
     <!-- FIN AFFICHAGE DU PLATEAU-->
 
 
   </center>
-
-    <h2>Entrée des coordonnées :</h2>
-    <form method="post" action="Index.php">
-      X1=
-      <input name="coordoX1" type="text"/>
-      Y1=
-      <input name="coordoY1" type="text"/><br>
-      DIR ( de 1 à 8 )=
-      <input name="coordoDIR" type="text"/>
-
-      <input type="submit" name="coordo" value="Envoyer"/>
-    </form>
 
     </body>
     </html>
