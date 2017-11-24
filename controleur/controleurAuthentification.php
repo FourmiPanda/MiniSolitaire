@@ -14,7 +14,7 @@ function __construct(){
 }
 
 function accueil(){
-  $this->vue->afficherAcceuil();
+  $this->vue->afficherAccueil();
 }
 
 

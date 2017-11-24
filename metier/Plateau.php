@@ -77,28 +77,28 @@
         //MOUVEMENT HAUT
         //MOUVEMENT BAS
         if($this->isCase($x1,$y1)==0){
-        if($this->billeSelect[1] == $x1 && $this->billeSelect[2] < $y1){
+        if($this->billeSelect[1] == $x1 && $this->billeSelect[2]+2 == $y1){
           $this->plateau[$x1][$y1-1] = 0;
           $this->plateau[ $this->billeSelect[1] ][ $this->billeSelect[2] ] = 0;
           $this->plateau[$x1][$y1] = 1;
             $this->billeSelect[0] = false;
-        }else if($this->billeSelect[1] == $x1 && $this->billeSelect[2] > $y1){
+        }else if($this->billeSelect[1] == $x1 && $this->billeSelect[2]-2 == $y1){
           $this->plateau[$x1][$y1+1] = 0;
           $this->plateau[ $this->billeSelect[1] ][ $this->billeSelect[2] ] = 0;
           $this->plateau[$x1][$y1] = 1;
             $this->billeSelect[0] = false;
-        }else if($this->billeSelect[1] > $x1 && $this->billeSelect[2] == $y1){
+        }else if($this->billeSelect[1]-2== $x1 && $this->billeSelect[2] == $y1){
           $this->plateau[$x1+1][$y1] = 0;
           $this->plateau[ $this->billeSelect[1] ][ $this->billeSelect[2] ] = 0;
           $this->plateau[$x1][$y1] = 1;
             $this->billeSelect[0] = false;
-        }else if($this->billeSelect[1] < $x1 && $this->billeSelect[2] == $y1){
+        }else if($this->billeSelect[1]+2 == $x1 && $this->billeSelect[2] == $y1){
           $this->plateau[$x1-1][$y1] = 0;
           $this->plateau[ $this->billeSelect[1] ][ $this->billeSelect[2] ] = 0;
           $this->plateau[$x1][$y1] = 1;
             $this->billeSelect[0] = false;
         }else{
-
+          $this->deSelectCase($this->plateau[ $this->billeSelect[1] ][ $this->billeSelect[2] ]);
         }
       }
 
