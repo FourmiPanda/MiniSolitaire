@@ -37,12 +37,15 @@ function verificationPseudo(){
           $this->vue->afficherPlateau();
         }else{
           $this->accueil();
+          echo "<center><h1><FONT color='white'>Login ou mot de passe incorrecte</FONT></h1></center>";
         }
       }else{
         $this->accueil();
+        echo "<center><h1><FONT color='white'>Login ou mot de passe incorrecte</FONT></h1></center>";
       }
   }else{
     $this->accueil();
+    echo "<center><h1><FONT color='white'>Veuiller remplir tout les champs</FONT></h1></center>";
   }
 
 }

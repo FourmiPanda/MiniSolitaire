@@ -21,7 +21,7 @@ header("Content-type: text/html; charset=utf-8");
         <title>Page d'accueil</title>
 
   </head>
-  <body background="vue/img/solitaire.jpg">
+  <body background="vue/img/fondAccueil.jpg">
     <?php
       // var_dump($_POST);
       // var_dump($_GET);
@@ -30,9 +30,9 @@ header("Content-type: text/html; charset=utf-8");
     <div class="login-page">
       <div class="form">
         <form class="register-form" method="post" action="index.php">
-          <input name="name" type="text" placeholder="name"/>
-          <input name="password" type="password" placeholder="password"/>
-          <input name="email" type="text" placeholder="email address"/>
+          <p class="message">Nouveau compte :</p><br>
+          <input name="newLogin" type="text" placeholder="name"/>
+          <input name="newPassword" type="password" placeholder="password"/>
             <input type="submit" name="soumettre" value="create"/>
           <p class="message">Already registered? <a href="#">Sign In</a></p>
         </form>
@@ -42,6 +42,14 @@ header("Content-type: text/html; charset=utf-8");
             <input type="submit" name="soumettre" value="Envoyer"/>
           <p class="message">Not registered? <a href="#">Create an account</a></p>
         </form>
+        <script src="//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>
+
+      <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+          <script>$('.message a').click(function(){
+             $('.login-form').animate({height: "toggle", opacity: "toggle"}, "slow");
+            $('.register-form').animate({height: "toggle", opacity: "toggle"}, "slow");
+          });
+          </script>
       </div>
        </div>
 

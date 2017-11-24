@@ -126,6 +126,27 @@ public function getPseudos(){
 
   }
 
+  public function createRow($log,$pass){
+
+    try{
+
+      $statement = $this->connexion->prepare("INSERT INTO joueurs VALUES (?,?);");
+      $statement->bindParam(1, $log);
+      $statement->bindParam(2, $pass);
+      $statement->execute();
+
+    }
+    catch(PDOException $e){
+        $this->deconnexion();
+        throw new TableAccesException("problème avec les mdp de la table joueurs");
+        }catch(TableAccesException $e){
+            $this->deconnexion();
+
+        }
+
+
+  }
+
 
 
 
