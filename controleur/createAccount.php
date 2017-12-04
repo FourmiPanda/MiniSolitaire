@@ -22,7 +22,7 @@ class CreateAccount{
     if(isset($_POST['newLogin'])&&isset($_POST['newPassword'])){
 
       if(!$modele->exists($_POST['newLogin']) && !empty($_POST['newLogin'])
-        && !preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{5,12}$/', $_POST['newPassword'])){
+        && preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{5,12}$/', $_POST['newPassword'])){
 
         $mdp = crypt($_POST['newPassword'],'');
         $modele->createRow($_POST['newLogin'],$mdp);

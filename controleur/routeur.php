@@ -25,17 +25,19 @@ class Routeur {
 
     if(isset($_POST['soumettre'])){
       if($_POST['soumettre']=="Envoyer"){ //CONNEXION
-          $this->ctrlAuthentification->verificationPseudo();
+        $this->ctrlAuthentification->verificationPseudo();
       }else if($_POST['soumettre']=="create"){  //CREATION D'UN COMPTE
-          $this->createAccount->create($_POST['newLogin'],$_POST['newPassword']);
+        $this->createAccount->create($_POST['newLogin'],$_POST['newPassword']);
       }else if($_POST['soumettre']=="deco"){  //DECONNEXION
         session_destroy();
         $this->ctrlAuthentification->accueil();
+      }else if($_POST['soumettre']=="reCall"){
+        $this->envoyerCoordo->reCall();
       }else{  //AUTRE RENVOIE A L'ACCUEIL
-          $this->ctrlAuthentification->accueil();
+        $this->ctrlAuthentification->accueil();
       }
     }else if(isset($_GET['x'])&& isset($_GET['y'])){//CAS OU SOUMETTRE N'EST PAS SET DONC DEPLACEMENT DE BILLE
-        $this->envoyerCoordo->envoyerCoordo($_GET['x'],$_GET['y']);
+      $this->envoyerCoordo->envoyerCoordo($_GET['x'],$_GET['y']);
     }else{//SINON ON REFRESH LA PAGE
       $this->ctrlAuthentification->accueil();
 
@@ -44,7 +46,7 @@ class Routeur {
     }
 
   }
- }
+}
 
 
 
