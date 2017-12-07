@@ -18,6 +18,24 @@
   margin-top: 0;
 
 }
+@media only screen and (max-width: 1457px) {
+    body {
+
+        background-image: url(../img/fondMobile.png);
+    }
+    .plateau {
+      margin-top: 40%;
+      margin-left: auto;
+      margin-right: auto;
+      width: fit-content;
+    }
+    .plateau img{
+      height: 100px;
+      width: 100px;
+      opacity:
+    }
+
+}
 
 
 [class*="BT"]{width:250px;display:block;position:absolute;padding:0;border-color:#0e0e0e;margin:0 0 10px;line-height:6px;border-style:solid;left:50%;margin-left:-125px;height:60px;}

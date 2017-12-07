@@ -140,9 +140,9 @@ class Vue{
                 echo $j;
                 echo "&y=";
                 echo $i;
-                echo "'><img alt='bille' src='vue/img/bille.jpg' height='50' width='50' /></a></div></td>\n\t\t";
+                echo "'><img alt='bille' src='vue/img/bille.png' height='50' width='50' /></a></div></td>\n\t\t";
               }else if($_SESSION['plateauFlorianIsmael']->isCase($j,$i)==3){
-                echo "<td><div class='select'><img src='vue/img/billeSelect.jpg' height='50' width='50'/></div></td>\n\t\t";
+                echo "<td><div class='select'><img src='vue/img/billeSelect.png' height='50' width='50'/></div></td>\n\t\t";
               }else if($_SESSION['plateauFlorianIsmael']->isCase($j,$i)==-1){
                 echo "<td><div class='blur'>";
                 echo "<img alt='' src='vue/img/caseInterdite.png' height='50' width='50' /></div></td>\n\t\t";
@@ -151,7 +151,7 @@ class Vue{
                 echo $j;
                 echo "&y=";
                 echo $i;
-                echo "'><img alt='bille' src='vue/img/blanc.jpg' height='50' width='50' /></a></div></td>\n\t\t";
+                echo "'><img alt='bille' src='vue/img/blanc.png' height='50' width='50' /></a></div></td>\n\t\t";
               }
             }
             echo "</tr>";
