@@ -30,14 +30,14 @@ class Vue{
       <div class="login-page">
         <div class="form">
           <form class="register-form" method="post" action="index.php">
-            <p class="">Nouveau compte :</p><br>
+            <p class="titreForm">Nouveau compte :</p><br>
             <input name="newLogin" type="text" placeholder="name"/>
             <input name="newPassword" type="password" placeholder="password"/>
             <input type="submit" name="soumettre" value="create"/>
             <p class="message">Already registered? <a href="#">Sign In</a></p>
           </form>
           <form class="login-form"  method="post" action="index.php">
-            <p class="">Connexion :</p><br>
+            <p class="titreForm">Connexion :</p><br>
             <input name="login" type="text" placeholder="login"/>
             <input name="password" type="password" placeholder="password"/>
             <input type="submit" name="soumettre" value="Envoyer"/>

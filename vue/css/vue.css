@@ -8,7 +8,7 @@
 .form {
   position: relative;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(8, 194, 235, 0.1);
   max-width: 360px;
   margin: 30% auto 100px;
   padding: 45px;
@@ -99,4 +99,8 @@ body {
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.titreForm{
+  color: white;
 }
