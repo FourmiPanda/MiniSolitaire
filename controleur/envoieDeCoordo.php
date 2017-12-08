@@ -49,6 +49,7 @@ class EnvoieDeCoordo{
           $this->vue->afficherPlateau();
         }
 
+
       }else{
         $_SESSION['plateauFlorianIsmael']->selectCase($x,$y);
         $this->vue->afficherPlateau();
