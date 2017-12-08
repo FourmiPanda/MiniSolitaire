@@ -16,7 +16,6 @@ class Vue{
     <head>
 
       <meta charset="utf-8" />
-      <script type="text/javascript" src="vue/js/anim.js"></script>
       <link rel="stylesheet" href="vue/css/vue.css" />
       <title>Page d'accueil</title>
 
@@ -46,11 +45,7 @@ class Vue{
           <script src="//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>
 
           <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-          <script>$('.message a').click(function(){
-            $('.login-form').animate({height: "toggle", opacity: "toggle"}, "slow");
-            $('.register-form').animate({height: "toggle", opacity: "toggle"}, "slow");
-          });
-          </script>
+          <script src="vue/js/animLogin.js"></script>
         </div>
       </div>
       <?php
@@ -87,6 +82,7 @@ class Vue{
       <meta charset="utf-8" />
       <link rel="stylesheet" href="vue/css/plateau.css" />
       <title>Page de jeu</title>
+
     </head>
     <body background="vue/img/fondNEWST.jpg" style="background-repeat:no-repeat;background-size: 100%;">
 
@@ -104,24 +100,7 @@ class Vue{
       <!--Heure-->
       <FONT color="white"><h1><div id="div_horloge"></div> Bonjour, <?php echo $_SESSION['pseudo'] ?>.</h1></FONT>
 
-      <script type="text/javascript">
-      window.onload=function() {
-        horloge('div_horloge');
-      };
-
-      function horloge(el) {
-        if(typeof el=="string") { el = document.getElementById(el); }
-        function actualiser() {
-          var date = new Date();
-          var str = date.getHours();
-          str += ':'+(date.getMinutes()<10?'0':'')+date.getMinutes();
-          str += ':'+(date.getSeconds()<10?'0':'')+date.getSeconds();
-          el.innerHTML = str;
-        }
-        actualiser();
-        setInterval(actualiser,1000);
-      }
-      </script>
+      <script type="text/javascript" src="vue/js/animHorloge.js"></script>
       <!-- HEURE -->
       <div class="plateau">
 
@@ -187,141 +166,7 @@ class Vue{
 
 
       <!-- Script de l'aspect graphique du bouton retour en arriere -->
-      <script type="text/javascript">
-      (function() {
-        var lastTime = 0;
-        var vendors = ['ms', 'moz', 'webkit', 'o'];
-        for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-          window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-          window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
-          || window[vendors[x]+'CancelRequestAnimationFrame'];
-        }
-
-        if (!window.requestAnimationFrame)
-        window.requestAnimationFrame = function(callback, element) {
-          var currTime = new Date().getTime();
-          var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-          var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-          timeToCall);
-          lastTime = currTime + timeToCall;
-          return id;
-        };
-
-        if (!window.cancelAnimationFrame)
-        window.cancelAnimationFrame = function(id) {
-          clearTimeout(id);
-        };
-      }());
-
-
-      (function() {
-
-        // Get the buttons.
-        var startBtn = document.getElementById('button');
-        /*var resetBtn = document.getElementById('resetBtn');*/
-        // A variable to store the requestID.
-        var requestID;
-        // Canvas
-        var canvas = document.getElementById('canvas');
-        // 2d Drawing Context.
-        var ctx = canvas.getContext('2d');
-
-        // Variables to for the drawing position and object.
-        var posX = 0;
-        var W = 246;
-        var H = 60;
-        var circles = [];
-
-        //Get canvas size
-        canvas.width = 246;
-        canvas.height = 60;
-
-        // Animate.
-        function animate() {
-          requestID = requestAnimationFrame(animate);
-          //Fill canvas with black color
-          //ctx.globalCompositeOperation = "source-over";
-          ctx.fillStyle = "rgba(0,0,0,0.15)";
-          ctx.fillRect(0, 0, W, H);
-
-          //Fill the canvas with circles
-          for(var j = 0; j < circles.length; j++){
-            var c = circles[j];
-
-            //Create the circles
-            ctx.beginPath();
-            ctx.arc(c.x, c.y, c.radius, 0, Math.PI*2, false);
-            ctx.fillStyle = "rgba("+c.r+", "+c.g+", "+c.b+", 0.5)";
-            ctx.fill();
-
-            c.x += c.vx;
-            c.y += c.vy;
-            c.radius -= .02;
-
-            if(c.radius < 0)
-            circles[j] = new create();
-          }
-
-
-
-        }
-
-        //Random Circles creator
-        function create() {
-
-          //Place the circles at the center
-
-          this.x = W/2;
-          this.y = H/2;
-
-
-          //Random radius between 2 and 6
-          this.radius = 2 + Math.random()*3;
-
-          //Random velocities
-          this.vx = -5 + Math.random()*10;
-          this.vy = -5 + Math.random()*10;
-
-          //Random colors
-          this.r = Math.round(Math.random())*255;
-          this.g = Math.round(Math.random())*255;
-          this.b = Math.round(Math.random())*255;
-        }
-
-        for (var i = 0; i < 500; i++) {
-          circles.push(new create());
-        }
-
-        // Event listener for the start button.
-        startBtn.addEventListener('mouseover', function(e) {
-          e.preventDefault();
-
-          // Start the animation.
-          requestID = requestAnimationFrame(animate);
-        });
-
-
-        // Event listener for the stop button.
-        startBtn.addEventListener('mouseout', function(e) {
-          e.preventDefault();
-
-          // Stop the animation;
-          cancelAnimationFrame(requestID);
-
-          e.preventDefault();
-
-          // Reset the X position to 0.
-          posX = 0;
-
-          // Clear the canvas.
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-          // Draw the initial box on the canvas.
-          ctx.fillRect(posX, 0, boxWidth, canvas.height);
-
-        });
-      }());
-      </script>
+      <script type="text/javascript" src="vue/js/animBouton.js"></script>
 
     </body>
     </html>
@@ -344,7 +189,23 @@ class Vue{
 
 
   public function afficherStat(){
-    echo "STATISTIQUES";
+    ?>  <html>
+    <head>
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="vue/css/stat.css" />
+      <title>Page de statistiques</title>
+      <script src="vue/js/stat.js"></script>
+      <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+      <script type="text/javascript" src="vue/js/apprise.min.js"></script>
+      <link rel="stylesheet" href="vue/css/apprise.min.css" type="text/css" />
+    </head>
+    <body background="vue/img/fondNEWST.jpg" style="background-repeat:no-repeat;background-size: 100%;">
+      <script>apprise('GG ! Congratulation',{'animate':true});</script>
+      <h1>Vous avez de bonne stats !</h1>
+    </body>
+    </html>
+
+    <?php
   }
 
 }

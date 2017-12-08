@@ -38,10 +38,8 @@ class EnvoieDeCoordo{
         $_SESSION['plateauFlorianIsmael']->move($x,$y);
         $_SESSION['victoire'] = $_SESSION['plateauFlorianIsmael']->win();
         if($_SESSION['victoire']){
-          $mod = new Modele();
           try{
-            $mod->partieJoue();
-            echo "<script>alert('VICTOIRE GG !')</script>";
+            
             $this->vue->afficherStat();
           }catch(TableAccesException $e){
             echo $e;

@@ -11,7 +11,13 @@
   margin-top: 10%;
   margin-left: auto;
   margin-right: auto;
-  width: fit-content;
+
+}
+
+.plateau table{
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .recall input{
@@ -27,7 +33,7 @@
       margin-top: 40%;
       margin-left: auto;
       margin-right: auto;
-      width: fit-content;
+
     }
     .plateau img{
       height: 100px;

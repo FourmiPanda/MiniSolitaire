@@ -31,16 +31,16 @@ class Modele{
   private $connexion;
 
 
-// Constructeur de la classe
+  // Constructeur de la classe
 
   public function __construct(){
-   try{
+    try{
 
 
-    $chaine="mysql:host=".HOST.";dbname=".BD;
-    $this->connexion = new PDO($chaine,LOGIN,PASSWORD);
-    $this->connexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-     }
+      $chaine="mysql:host=".HOST.";dbname=".BD;
+      $this->connexion = new PDO($chaine,LOGIN,PASSWORD);
+      $this->connexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    }
     catch(PDOException $e){
       $exception=new ConnexionException("problème de connexion à la base");
       throw $exception;
@@ -50,58 +50,58 @@ class Modele{
 
 
 
-// A développer
-// méthode qui permet de se deconnecter de la base
-public function deconnexion(){
-   $this->connexion=null;
-}
-
-
-//A développer
-// utiliser une requête classique
-// méthode qui permet de récupérer les pseudos dans la table pseudo
-// post-condition:
-//retourne un tableau à une dimension qui contient les pseudos.
-// si un problème est rencontré, une exception de type TableAccesException est levée
-
-public function getPseudos(){
-   try{
-
-  $statement=$this->connexion->query("SELECT pseudo from joueurs;");
-
-  while($ligne=$statement->fetch()){
-  $result[]=$ligne['pseudo'];
+  // A développer
+  // méthode qui permet de se deconnecter de la base
+  public function deconnexion(){
+    $this->connexion=null;
   }
-  return($result);
-  }
-  catch(PDOException $e){
+
+
+  //A développer
+  // utiliser une requête classique
+  // méthode qui permet de récupérer les pseudos dans la table pseudo
+  // post-condition:
+  //retourne un tableau à une dimension qui contient les pseudos.
+  // si un problème est rencontré, une exception de type TableAccesException est levée
+
+  public function getPseudos(){
+    try{
+
+      $statement=$this->connexion->query("SELECT pseudo from joueurs;");
+
+      while($ligne=$statement->fetch()){
+        $result[]=$ligne['pseudo'];
+      }
+      return($result);
+    }
+    catch(PDOException $e){
       throw new TableAccesException("problème avec la table pseudonyme");
     }
   }
 
 
   public function exists($pseudo){
-  try{
-  	$statement = $this->connexion->prepare("select pseudo from joueurs where pseudo=?;");
-  	$statement->bindParam(1, $pseudoParam);
-  	$pseudoParam=$pseudo;
-  	$statement->execute();
-  	$result=$statement->fetch(PDO::FETCH_ASSOC);
+    try{
+      $statement = $this->connexion->prepare("select pseudo from joueurs where pseudo=?;");
+      $statement->bindParam(1, $pseudoParam);
+      $pseudoParam=$pseudo;
+      $statement->execute();
+      $result=$statement->fetch(PDO::FETCH_ASSOC);
 
-  	if ($result["pseudo"]!=NUll){
-  	return true;
-  	}
-  	else{
-  	return false;
-  	}
-  }
-  catch(PDOException $e){
+      if ($result["pseudo"]!=NUll){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    catch(PDOException $e){
       $this->deconnexion();
       throw new TableAccesException("problème avec la table joueurs");
-      }catch(TableAccesException $e){
-          $this->deconnexion();
+    }catch(TableAccesException $e){
+      $this->deconnexion();
 
-      }
+    }
   }
   public function getMdp($pseudo){
     try{
@@ -117,40 +117,61 @@ public function getPseudos(){
 
     }
     catch(PDOException $e){
-        $this->deconnexion();
-        throw new TableAccesException("problème avec les mdp de la table joueurs");
-        }catch(TableAccesException $e){
-            $this->deconnexion();
+      $this->deconnexion();
+      throw new TableAccesException("problème avec les mdp de la table joueurs");
+    }catch(TableAccesException $e){
+      $this->deconnexion();
 
-        }
+    }
 
   }
 
   public function createRow($log,$pass){
 
     try{
-
+      $partJoue = 0;
       $statement = $this->connexion->prepare("INSERT INTO joueurs VALUES (?,?);");
       $statement->bindParam(1, $log);
       $statement->bindParam(2, $pass);
+
       $statement->execute();
 
     }
     catch(PDOException $e){
-        $this->deconnexion();
-        throw new TableAccesException("problème avec les mdp de la table joueurs");
-        }catch(TableAccesException $e){
-            $this->deconnexion();
+      $this->deconnexion();
+      throw new TableAccesException("problème avec les mdp de la table joueurs");
+    }catch(TableAccesException $e){
+      $this->deconnexion();
 
-        }
+    }
 
 
   }
 
+  public function partieJoue(){
+    try{
 
+      $statement = $this->connexion->prepare("INSERT INTO parties(pseudo,partieGagnee) VALUES (?,?);");
+      $statement->bindParam(1, $_SESSION['pseudo']);
+      if(isset($_SESSION['victoire'])){
+        if($_SESSION['victoire']){
+          $res = 1;
+        }else{
+          $res = 0;
+        }
+      }
+      $statement->bindParam(2, $res);
+      $statement->execute();
 
+    }catch(PDOException $e){
+      $this->deconnexion();
+      throw new TableAccesException("problème avec les mdp de la table parties");
+    }catch(TableAccesException $e){
+      $this->deconnexion();
+      throw new TableAccesException("problème avec les mdp de la table parties");
+    }
 
-
+  }
 }
 
 ?>
