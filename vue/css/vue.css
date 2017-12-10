@@ -1,9 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
+/*css login*/
 .login-page {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
+
 }
 .form {
   position: relative;
@@ -91,8 +92,8 @@
 }
 body {
   background-color: black;
-/*  background: #76b852; *//* fallback for old browsers */
-/*  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  /*  background: #76b852; *//* fallback for old browsers */
+  /*  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
   background: -moz-linear-gradient(right, #76b852, #8DC26F);
   background: -o-linear-gradient(right, #76b852, #8DC26F);
   background: linear-gradient(to left, #76b852, #8DC26F);*/
@@ -106,18 +107,18 @@ body {
 }
 
 @media only screen and (max-width: 1457px) {
-    body {
+  body {
 
-        background-image: url(../img/fondMobile.png);
-    }
-    .form {
-      position: relative;
-      z-index: 1;
-      background: rgba(8, 194, 235, 0.1);
-      max-width: 360px;
-      margin: 90% auto 100px;
-      padding: 45px;
-      text-align: center;
-      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    }
+    background-image: url(../img/fondMobile.png);
+  }
+  .form {
+    position: relative;
+    z-index: 1;
+    background: rgba(8, 194, 235, 0.1);
+    max-width: 360px;
+    margin: 90% auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  }
 }

@@ -134,6 +134,7 @@ class Plateau{
         $this->plateau[ $this->billeSelect[1] ][ $this->billeSelect[2] ] = 0;
         $this->plateau[$x1][$y1] = 1;
         $this->billeSelect[0] = false;
+        return true;
       }else if($this->billeSelect[1] == $x1 && $this->billeSelect[2]-2 == $y1 && $this->isCase($x1,$y1+1)==1 ){
 
         $this->lastMove[0] = true;
@@ -148,6 +149,7 @@ class Plateau{
         $this->plateau[ $this->billeSelect[1] ][ $this->billeSelect[2] ] = 0;
         $this->plateau[$x1][$y1] = 1;
         $this->billeSelect[0] = false;
+        return true;
       }else if($this->billeSelect[1]-2== $x1 && $this->billeSelect[2] == $y1 && $this->isCase($x1+1,$y1)==1){
 
         $this->lastMove[0] = true;
@@ -162,6 +164,7 @@ class Plateau{
         $this->plateau[ $this->billeSelect[1] ][ $this->billeSelect[2] ] = 0;
         $this->plateau[$x1][$y1] = 1;
         $this->billeSelect[0] = false;
+        return true;
       }else if($this->billeSelect[1]+2 == $x1 && $this->billeSelect[2] == $y1 && $this->isCase($x1-1,$y1)==1){
 
         $this->lastMove[0] = true;
@@ -177,11 +180,14 @@ class Plateau{
         $this->plateau[ $this->billeSelect[1] ][ $this->billeSelect[2] ] = 0;
         $this->plateau[$x1][$y1] = 1;
         $this->billeSelect[0] = false;
+        return true;
       }else{
         $this->deSelectCase($this->plateau[ $this->billeSelect[1] ][ $this->billeSelect[2] ]);
+        return false;
       }
     }else{
       $this->deSelectCase($this->plateau[ $this->billeSelect[1] ][ $this->billeSelect[2] ]);
+      return false;
     }
 
 
@@ -215,8 +221,34 @@ class Plateau{
   }
 
   public function lose(){
-
-
+    $bool = true;
+    for ($i=0; $i < 7 ; $i++) {
+      for ($j=0; $j < 7; $j++) {
+        if($this->plateau[$i][$j] == 1){
+          if($i-2>=0){
+            if($this->plateau[$i-1][$j]==1 && $this->plateau[$i-2][$j]==0){
+              $bool=false;
+            }
+          }
+          if($i+2<7){
+            if($this->plateau[$i+1][$j]==1 && $this->plateau[$i+2][$j]==0){
+              $bool=false;
+            }
+          }
+          if($j-2>=0){
+            if($this->plateau[$i][$j-1]==1 && $this->plateau[$i][$j-2]==0){
+              $bool=false;
+            }
+          }
+          if($j+2<7){
+            if($this->plateau[$i][$j+1]==1 && $this->plateau[$i][$j+2]==0){
+              $bool=false;
+            }
+          }
+        }
+      }
+    }
+    return $bool;
   }
 
 }

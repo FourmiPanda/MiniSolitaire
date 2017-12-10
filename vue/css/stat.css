@@ -1,0 +1,61 @@
+body {
+  font-family: Verdana;
+  font-size: 12px;
+  padding: 10px;
+  background-repeat:no-repeat;
+  background-size: 100%;
+  background-color: black;
+}
+.tableContainer{
+  margin: 35% auto 0% auto;
+  width: 50%;
+}
+.tableContainerPerso{
+  margin: 0% auto 0% 30%;
+  width: 20%;
+  text-align: center;
+  float: left;
+}
+
+.tableContainerPersoRatio{
+  margin: 0% auto 0% auto;
+  width: 20%;
+  float: left;
+  text-align: center;
+}
+.myStat{
+  margin: 10% auto 0% auto;
+  width: 50%;
+}
+
+
+#title{
+  font-family: Verdana;
+  color: white;
+}
+#chartdiv {
+  width: 100%;
+  height: 500px;
+  font-size: 11px;
+}
+
+#data,
+#data th,
+#data td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+#data th {
+  font-weight: bold;
+  background-color: #eee;
+}
+
+
+@media only screen and (max-width: 1457px) {
+  body {
+
+    background-image: url(../img/fondMobile.png);
+  }
+
+}

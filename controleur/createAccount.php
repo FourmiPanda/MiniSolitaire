@@ -1,8 +1,10 @@
 <?php
 require_once PATH_VUE."/vue.php";
-require_once PATH_MODELE."/modele.php";
+require PATH_MODELE."/modele.php";
+require_once PATH_METIER."/Plateau.php";
 
-class CreateAccount{
+
+class ControleurAuthentification{
 
   private $vue;
 
@@ -12,35 +14,50 @@ class CreateAccount{
 
   }
 
-  function accueil(){
-    $this->vue->afficherAccueil();
+  function accueil($bool,$ret){
+    $this->vue->afficherAccueil($bool,$ret);
   }
 
 
-  function create($login,$password){
+
+
+  function verificationPseudo(){
+
     $modele = new Modele();
-    if(isset($_POST['newLogin'])&&isset($_POST['newPassword'])){
+    if(isset($_POST['login'])&&isset($_POST['password'])){
 
-      if(!$modele->exists($_POST['newLogin']) && !empty($_POST['newLogin'])
-        && preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{5,12}$/', $_POST['newPassword'])){
 
-        $mdp = crypt($_POST['newPassword'],'');
-        $modele->createRow($_POST['newLogin'],$mdp);
-        $this->accueil();
-        echo "<center><h1><FONT color='white'>Félicitation votre compte est crée !</FONT></h1></center>";
+      if($modele->exists($_POST['login'])){
 
+        $mdp = $modele->getMdp($_POST['login']);
+        $passCry = crypt($_POST['password'],$mdp);
+
+        if($mdp==$passCry){
+          $_SESSION['pseudo'] = $_POST['login'];
+          $_SESSION['Auth'] = true;
+
+          $plateau = new Plateau();
+          if(!isset($_SESSION['plateauFlorianIsmael'])){
+            $_SESSION['plateauFlorianIsmael'] = $plateau;
+          }
+          if(!isset($_SESSION['victoire'])){
+            $_SESSION['victoire'] = false;
+          }
+          $this->vue->afficherPlateau(true);
+        }else{
+          $_SESSION['Auth'] = false;
+          $this->accueil(true,"Mauvais mot de passe");
+
+
+        }
       }else{
-
-        $this->accueil();
-        echo "<center><h1><FONT color='white'>Nom de compte ou mot de passe invalide ( Le mot de passe doit contenir : 1 CHIFFRE , 1 LETTRE , entre 5 et 12 caractères)</FONT></h1></center>";
-
+        $_SESSION['Auth'] = false;
+        $this->accueil(true,"Login inexistant");
       }
 
-
     }else{
-      $this->accueil();
-      echo "<center><h1><FONT color='white'>Veuiller remplir tout les champs</FONT></h1></center>";
-
+      $_SESSION['Auth'] = false;
+      $this->accueil(true,"Veuiller remplir correctement les champs");
 
     }
 
@@ -49,6 +66,4 @@ class CreateAccount{
 
 
 }
-
-
 ?>

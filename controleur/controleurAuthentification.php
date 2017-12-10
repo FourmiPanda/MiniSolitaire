@@ -14,10 +14,9 @@ class ControleurAuthentification{
 
   }
 
-  function accueil(){
-    $this->vue->afficherAccueil();
+  function accueil($bool,$ret){
+    $this->vue->afficherAccueil($bool,$ret);
   }
-
 
 
 
@@ -44,24 +43,21 @@ class ControleurAuthentification{
           if(!isset($_SESSION['victoire'])){
             $_SESSION['victoire'] = false;
           }
-
-
-
-          $this->vue->afficherPlateau();
+          $this->vue->afficherPlateau(true);
         }else{
           $_SESSION['Auth'] = false;
-          $this->accueil();
+          $this->accueil(true,"Mauvais mot de passe");
 
 
         }
       }else{
         $_SESSION['Auth'] = false;
-        $this->accueil();
+        $this->accueil(true,"Login inexistant");
       }
 
     }else{
       $_SESSION['Auth'] = false;
-      $this->accueil();
+      $this->accueil(true,"Veuiller remplir correctement les champs");
 
     }
 
