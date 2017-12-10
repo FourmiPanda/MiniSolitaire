@@ -36,7 +36,7 @@ INSERT INTO `joueurs` (`pseudo`, `motDePasse`) VALUES
 -- Indexes for table `joueurs`
 --
 ALTER TABLE `joueurs`
-  ADD PRIMARY KEY (`pseudo`);
+ADD PRIMARY KEY (`pseudo`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

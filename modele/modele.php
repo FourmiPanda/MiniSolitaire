@@ -42,8 +42,9 @@ class Modele{
       $this->connexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     }
     catch(PDOException $e){
-      $exception=new ConnexionException("problème de connexion à la base");
-      throw $exception;
+      throw $e;
+    }catch(ConnexionException $e){
+      throw $e;
     }
   }
 
@@ -173,28 +174,92 @@ class Modele{
 
   }
   public function getRatioUser($pseudo){
+            try{
+            $requete = "
+            SELECT p1.pseudo, Count(p2.pseudo)/(select count(*) from parties where
+                  pseudo=?) AS ratio
+                  FROM (
+                    SELECT DISTINCT pseudo
+                    FROM parties where pseudo=?
+                    ) AS p1
+                    LEFT JOIN (
+                      SELECT pseudo, partieGagnee
+                      FROM parties
+                      WHERE partieGagnee=1 and pseudo=?
+                      ) AS p2
+                      ON p2.pseudo = p1.pseudo
+                      GROUP BY p1.pseudo
+                ";
+                $statement=$this->connexion->prepare($requete);
+                $statement->bindParam(1, $pseudo);
+                $statement->bindParam(2, $pseudo);
+                $statement->bindParam(3, $pseudo);
+
+                $statement->execute();
+                return $statement->fetchAll();
+              }
+              catch(PDOException $e){
+                $this->deconnexion();
+                throw new TableAccesException("problème avec les mdp de la table joueurs");
+              }catch(TableAccesException $e){
+                $this->deconnexion();
+              }
+
+          }
+
+  public function getPlayerStats($pseudo){
+
+
     try{
+
+      $requete = "
+      select count(*) as NbVictoires,
+      (select count(*)  from parties p where partieGagnee=0 and p.pseudo=?) as NbDefaites,
+      (select count(*) from parties p2 where p2.pseudo = ?)
+      as NbParties from parties where partieGagnee=1 and pseudo=?;
+      ";
+      $statement=$this->connexion->prepare($requete);
+      $statement->bindParam(1, $pseudo);
+      $statement->bindParam(2, $pseudo);
+      $statement->bindParam(3, $pseudo);
+
+      $statement->execute();
+      return $statement->fetch();
+    }
+    catch(PDOException $e){
+      $this->deconnexion();
+      throw new TableAccesException("problème avec les mdp de la table joueurs");
+    }catch(TableAccesException $e){
+      $this->deconnexion();
+
+    }
+
+
+  }
+
+  public function getStats(){
+
+    try{
+
       $requete = "
       SELECT p1.pseudo, Count(p2.pseudo)/(select count(*) from parties where
-      pseudo=?) AS ratio
+      pseudo=p1.pseudo) AS ratio
       FROM (
         SELECT DISTINCT pseudo
-        FROM parties where pseudo=?
+        FROM parties
         ) AS p1
         LEFT JOIN (
           SELECT pseudo, partieGagnee
           FROM parties
-          WHERE partieGagnee=1 and pseudo=?
+          WHERE partieGagnee=1
           ) AS p2
           ON p2.pseudo = p1.pseudo
           GROUP BY p1.pseudo
-          ";
-          $statement=$this->connexion->prepare($requete);
-          $statement->bindParam(1, $pseudo);
-          $statement->bindParam(2, $pseudo);
-          $statement->bindParam(3, $pseudo);
+          ORDER BY 2 DESC
 
-          $statement->execute();
+
+          ";
+          $statement=$this->connexion->query($requete);
           return $statement->fetchAll();
         }
         catch(PDOException $e){
@@ -202,75 +267,11 @@ class Modele{
           throw new TableAccesException("problème avec les mdp de la table joueurs");
         }catch(TableAccesException $e){
           $this->deconnexion();
-        }
-
-      }
-
-      public function getPlayerStats($pseudo){
-
-
-        try{
-
-          $requete = "
-          select count(*) as NbVictoires,
-          (select count(*)  from parties p where partieGagnee=0 and p.pseudo=?) as NbDefaites,
-          (select count(*) from parties p2 where p2.pseudo = ?)
-          as NbParties from parties where partieGagnee=1 and pseudo=?;
-          ";
-          $statement=$this->connexion->prepare($requete);
-          $statement->bindParam(1, $pseudo);
-          $statement->bindParam(2, $pseudo);
-          $statement->bindParam(3, $pseudo);
-
-          $statement->execute();
-          return $statement->fetch();
-        }
-        catch(PDOException $e){
-          $this->deconnexion();
-          throw new TableAccesException("problème avec les mdp de la table joueurs");
-        }catch(TableAccesException $e){
-          $this->deconnexion();
 
         }
 
 
       }
+    }
 
-      public function getStats(){
-
-        try{
-
-          $requete = "
-          SELECT p1.pseudo, Count(p2.pseudo)/(select count(*) from parties where
-          pseudo=p1.pseudo) AS ratio
-          FROM (
-            SELECT DISTINCT pseudo
-            FROM parties
-            ) AS p1
-            LEFT JOIN (
-              SELECT pseudo, partieGagnee
-              FROM parties
-              WHERE partieGagnee=1
-              ) AS p2
-              ON p2.pseudo = p1.pseudo
-              GROUP BY p1.pseudo
-              ORDER BY 2 DESC
-
-
-              ";
-              $statement=$this->connexion->query($requete);
-              return $statement->fetchAll();
-            }
-            catch(PDOException $e){
-              $this->deconnexion();
-              throw new TableAccesException("problème avec les mdp de la table joueurs");
-            }catch(TableAccesException $e){
-              $this->deconnexion();
-
-            }
-
-
-          }
-        }
-
-        ?>
+    ?>

@@ -201,56 +201,56 @@ class Vue{
       <h1 id="title">Statistiques</h1>
       <div class="myStat">
 
-        <div class='tableContainerPerso'>
-          <table class="highchart" data-graph-container-before="1" data-graph-type="column" hidden>
-            <caption>Vos statistiques</caption>
-            <thead>
-              <tr>
-                <th>statistiques</th>
-                <th>score</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Nombres de victoires</td>
-                <td><?php echo $tabStatsPerso['NbVictoires'];?></td>
-              </tr>
-              <tr>
-                <td>Nombres de défaites</td>
-                <td><?php echo $tabStatsPerso['NbDefaites'];?></td>
-              </tr>
-              <tr>
-                <td>Nombres de parties</td>
-                <td><?php echo $tabStatsPerso['NbParties'];?></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class='tableContainerPersoRatio'>
-          <table class="highchart" data-graph-container-before="1" data-graph-type="column" hidden>
-            <caption>Vos statistiques</caption>
-            <thead>
-              <tr>
-                <th>ratio</th>
-                <th>Joueurs</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              foreach($tabStatRatio as $row){
-                ?>
-                <tr>
-                  <td><?php echo $row['pseudo'];?></td>
-                  <td><?php  echo $row['ratio'];?></td>
-                </tr>
-                <?php
-              }
-
-              ?>
-            </tbody>
-          </table>
-        </div>
+      <div class='tableContainerPerso'>
+        <table class="highchart" data-graph-container-before="1" data-graph-type="column" hidden>
+          <caption>Vos statistiques</caption>
+          <thead>
+            <tr>
+              <th>statistiques</th>
+              <th>score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nombres de victoires</td>
+              <td><?php echo $tabStatsPerso['NbVictoires'];?></td>
+            </tr>
+            <tr>
+              <td>Nombres de défaites</td>
+              <td><?php echo $tabStatsPerso['NbDefaites'];?></td>
+            </tr>
+            <tr>
+              <td>Nombres de parties</td>
+              <td><?php echo $tabStatsPerso['NbParties'];?></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      <div class='tableContainerPersoRatio'>
+        <table class="highchart" data-graph-container-before="1" data-graph-type="column" hidden>
+          <caption>Vos statistiques</caption>
+          <thead>
+            <tr>
+              <th>ratio</th>
+              <th>Joueurs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            foreach($tabStatRatio as $row){
+              ?>
+              <tr>
+                <td><?php echo $row['pseudo'];?></td>
+                <td><?php  echo $row['ratio'];?></td>
+              </tr>
+              <?php
+            }
+
+            ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
       <div class='tableContainer'>
         <table class="highchart" data-graph-container-before="1" data-graph-type="column">
           <caption>Ranking : TOP 3</caption>

@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `parties` (
 -- Indexes for table `parties`
 --
 ALTER TABLE `parties`
-  ADD PRIMARY KEY (`id`), ADD KEY `pseudo` (`pseudo`), ADD KEY `pseudo_2` (`pseudo`);
+ADD PRIMARY KEY (`id`), ADD KEY `pseudo` (`pseudo`), ADD KEY `pseudo_2` (`pseudo`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -39,7 +39,7 @@ ALTER TABLE `parties`
 -- AUTO_INCREMENT for table `parties`
 --
 ALTER TABLE `parties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
