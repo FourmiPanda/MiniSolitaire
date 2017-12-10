@@ -1,10 +1,8 @@
 <?php
 require_once PATH_VUE."/vue.php";
-require PATH_MODELE."/modele.php";
-require_once PATH_METIER."/Plateau.php";
+require_once PATH_MODELE."/modele.php";
 
-
-class ControleurAuthentification{
+class CreateAccount{
 
   private $vue;
 
@@ -19,45 +17,28 @@ class ControleurAuthentification{
   }
 
 
-
-
-  function verificationPseudo(){
-
+  function create($login,$password){
     $modele = new Modele();
-    if(isset($_POST['login'])&&isset($_POST['password'])){
+    if(isset($_POST['newLogin'])&&isset($_POST['newPassword'])){
 
+      if(!$modele->exists($_POST['newLogin']) && !empty($_POST['newLogin']) && !empty($_POST['newPassword'])){
 
-      if($modele->exists($_POST['login'])){
+        $mdp = crypt($_POST['newPassword'],'');
+        $modele->createRow($_POST['newLogin'],$mdp);
+        $ret ="Félicitation votre compte est crée !";
+        $this->accueil(true,$ret);
 
-        $mdp = $modele->getMdp($_POST['login']);
-        $passCry = crypt($_POST['password'],$mdp);
-
-        if($mdp==$passCry){
-          $_SESSION['pseudo'] = $_POST['login'];
-          $_SESSION['Auth'] = true;
-
-          $plateau = new Plateau();
-          if(!isset($_SESSION['plateauFlorianIsmael'])){
-            $_SESSION['plateauFlorianIsmael'] = $plateau;
-          }
-          if(!isset($_SESSION['victoire'])){
-            $_SESSION['victoire'] = false;
-          }
-          $this->vue->afficherPlateau(true);
-        }else{
-          $_SESSION['Auth'] = false;
-          $this->accueil(true,"Mauvais mot de passe");
-
-
-        }
       }else{
-        $_SESSION['Auth'] = false;
-        $this->accueil(true,"Login inexistant");
+        $ret = "Nom de compte ou mot de passe invalide";
+        $this->accueil(true,$ret);
+
       }
 
+
     }else{
-      $_SESSION['Auth'] = false;
-      $this->accueil(true,"Veuiller remplir correctement les champs");
+      $ret = "Veuiller remplir tout les champs";
+      $this->accueil(true,$ret);
+
 
     }
 
@@ -66,4 +47,6 @@ class ControleurAuthentification{
 
 
 }
+
+
 ?>
